@@ -30,6 +30,10 @@ func main() {
 	flag.BoolVar(&silentFlag, "s", false, "Alias for -silent")
 	flag.BoolVar(&silentFlag, "silent", false, "Don't produce any output")
 
+	var privateFlag bool
+	flag.BoolVar(&privateFlag, "p", false, "Alias for -private")
+	flag.BoolVar(&privateFlag, "private", false, "Make the gist private")
+
 	flag.Parse()
 
 	if versionFlag {
@@ -64,8 +68,11 @@ func main() {
 		Content:  &contents,
 	}
 
+	makePublic := !privateFlag
+
 	gist := github.Gist{
-		Files: gistfiles,
+		Files:  gistfiles,
+		Public: &makePublic,
 	}
 
 	resultGist, _, err := client.Gists.Create(ctx, &gist)
