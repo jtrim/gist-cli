@@ -8,6 +8,12 @@ Usage of gist:
         Alias for -filename
   -filename string
         Name for the gist file to be created. Required.
+  -p    Alias for -private
+  -private
+        Make the gist private
+  -s    Alias for -silent
+  -silent
+        Don't produce any output
   -v    Alias for -version
   -version
         Print version info and exit
