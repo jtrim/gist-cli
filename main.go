@@ -26,6 +26,10 @@ func main() {
 	flag.StringVar(&filename, "f", "", "Alias for -filename")
 	flag.StringVar(&filename, "filename", "", "Name for the gist file to be created. Required.")
 
+	var silentFlag bool
+	flag.BoolVar(&silentFlag, "s", false, "Alias for -silent")
+	flag.BoolVar(&silentFlag, "silent", false, "Don't produce any output")
+
 	flag.Parse()
 
 	if versionFlag {
@@ -64,9 +68,13 @@ func main() {
 		Files: gistfiles,
 	}
 
-	_, _, err = client.Gists.Create(ctx, &gist)
+	resultGist, _, err := client.Gists.Create(ctx, &gist)
 
 	if err != nil {
 		panic(err)
+	}
+
+	if silentFlag == false {
+		fmt.Printf("%s available at %s\n", filename, resultGist.GetHTMLURL())
 	}
 }
