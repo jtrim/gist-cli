@@ -29,7 +29,7 @@ func main() {
 	flag.Parse()
 
 	if versionFlag {
-		fmt.Printf("gist v0.0.0\n")
+		fmt.Printf("gist v0.0.1\n")
 		os.Exit(0)
 	}
 
